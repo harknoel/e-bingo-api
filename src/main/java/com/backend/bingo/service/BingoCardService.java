@@ -15,8 +15,8 @@ import java.util.Random;
 public class BingoCardService {
     private final BingoCardRepository bingoCardRepository;
 
-    public int generateRandomNumber(Integer bingoId) {
-        Optional<BingoCard> optionalBingoCard = bingoCardRepository.findById(bingoId);
+    public int generateRandomNumber(String gameCode) {
+        Optional<BingoCard> optionalBingoCard = bingoCardRepository.findByGameCode(gameCode);
         if(optionalBingoCard.isEmpty()) {
             return -1;
         }
@@ -48,5 +48,11 @@ public class BingoCardService {
         bingoCardRepository.save(bingoCard);
 
         return randomNumber;
+    }
+
+    public String generateBingoCard() {
+        BingoCard bingoCard = new BingoCard();
+        bingoCardRepository.save(bingoCard);
+        return bingoCard.getGameCode();
     }
 }
