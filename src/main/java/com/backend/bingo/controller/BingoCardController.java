@@ -16,9 +16,15 @@ public class BingoCardController {
         this.bingoCardService = bingoCardService;
     }
 
-    @GetMapping("/generate/{bingoId}")
-    public ResponseEntity<Integer> generateRandomNumber(@PathVariable Integer bingoId) {
-        int num = bingoCardService.generateRandomNumber(bingoId);
+    @GetMapping("/generate/card")
+    public ResponseEntity<String> generateBingoCard() {
+        String gameCode = bingoCardService.generateBingoCard();
+        return ResponseEntity.ok(gameCode);
+    }
+
+    @GetMapping("/generate/{gameCode}")
+    public ResponseEntity<Integer> generateRandomNumber(@PathVariable String gameCode) {
+        int num = bingoCardService.generateRandomNumber(gameCode);
         return ResponseEntity.ok(num);
     }
 }
