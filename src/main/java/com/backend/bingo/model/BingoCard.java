@@ -1,5 +1,7 @@
 package com.backend.bingo.model;
 
+import com.backend.bingo.util.NumberInitializer;
+import com.backend.bingo.util.RandomCodeGenerator;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,8 +16,8 @@ import java.util.stream.IntStream;
 public class BingoCard {
 
     public BingoCard() {
-        this.bingoNumbers = initializeNumbers();
-        this.gameCode = generateGameCode();
+        this.bingoNumbers = NumberInitializer.initializeNumbers(1, 75);
+        this.gameCode = RandomCodeGenerator.randomCode(8);
     }
 
     @Id
@@ -29,25 +31,4 @@ public class BingoCard {
 
     @ElementCollection
     private List<Integer> bingoNumbers;
-
-    private static final String ALPHANUMERIC_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    public static String generateGameCode() {
-        Random random = new SecureRandom();
-        StringBuilder sb = new StringBuilder(8); // Length of the game code
-
-        for (int i = 0; i < 8; i++) {
-            int randomIndex = random.nextInt(ALPHANUMERIC_CHARACTERS.length());
-            char randomChar = ALPHANUMERIC_CHARACTERS.charAt(randomIndex);
-            sb.append(randomChar);
-        }
-
-        return sb.toString();
-    }
-
-    private List<Integer> initializeNumbers() {
-        return IntStream.rangeClosed(1, 75)
-                .boxed()
-                .collect(Collectors.toList());
-    }
 }
