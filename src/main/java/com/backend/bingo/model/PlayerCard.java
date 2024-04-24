@@ -18,7 +18,7 @@ public class PlayerCard {
 
     public PlayerCard(String gameCode) {
         this.playerToken = RandomCodeGenerator.randomCode(16);
-        this.playerNumbers = RandomNumberInitializer.generateRandomNumbers(1, 75, 50);
+        this.playerNumbers = RandomNumberInitializer.generateRandomNumbers(1, 75, 25);
         this.gameCode = gameCode;
     }
 
