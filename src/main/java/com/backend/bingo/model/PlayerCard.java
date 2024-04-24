@@ -11,12 +11,12 @@ import lombok.Data;
 public class PlayerCard {
 
     public PlayerCard() {
-        this.playerGameCode = RandomCodeGenerator.randomCode(16);
+        this.playerToken = RandomCodeGenerator.randomCode(16);
     }
 
     @Id
     @GeneratedValue
     private Integer playerCardId;
 
-    private String playerGameCode;
+    private String playerToken;
 }
