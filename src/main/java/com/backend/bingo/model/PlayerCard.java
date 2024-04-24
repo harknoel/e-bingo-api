@@ -1,11 +1,22 @@
 package com.backend.bingo.model;
 
+import com.backend.bingo.util.RandomCodeGenerator;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-
+@Data
+@Entity
 public class PlayerCard {
+
+    public PlayerCard() {
+        this.playerGameCode = RandomCodeGenerator.randomCode(16);
+    }
+
+    @Id
+    @GeneratedValue
+    private Integer playerCardId;
+
+    private String playerGameCode;
 }
